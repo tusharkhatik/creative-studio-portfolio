@@ -1,24 +1,39 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+
 import {
   ArrowUpRight,
   Mail,
+  MapPin,
+  Sparkles,
+  Palette,
+  Video,
   Phone,
   MessageCircle,
-  MapPin,
-  Send,
-  Check,
-  ChevronDown,
   Clock3,
+  ChevronDown,
+  Send,
+  Camera,
+  Users,
+  Clapperboard,
+  ShoppingBag,
+  Building2,
+  Globe,
+  CheckCircle2,
 } from "lucide-react";
 
-/*
-|--------------------------------------------------------------------------
-| CONTACT INFORMATION
-|--------------------------------------------------------------------------
-| Replace these placeholders with your real business details before launch.
-|--------------------------------------------------------------------------
-*/
+import {
+  FaInstagram,
+  FaLinkedinIn,
+  FaFacebookF,
+  FaGithub,
+  FaYoutube,
+  FaWhatsapp,
+} from "react-icons/fa";
+
+/* =========================================================
+   CONTACT INFORMATION
+========================================================= */
 
 const contactInfo = {
   phone: "+91 00000 00000",
@@ -32,22 +47,30 @@ const contactInfo = {
     url: "https://instagram.com/yourhandle",
   },
 
-  behance: {
-    handle: "yourprofile",
-    url: "https://www.behance.net/yourprofile",
+  youtube: {
+    handle: "@yourchannel",
+    url: "https://www.youtube.com/@yourchannel",
   },
 
   linkedin: {
     handle: "yourname",
     url: "https://www.linkedin.com/in/yourname/",
   },
+
+  facebook: {
+    handle: "yourpage",
+    url: "https://facebook.com/yourpage",
+  },
+
+  github: {
+    handle: "yourprofile",
+    url: "https://github.com/yourprofile",
+  },
 };
 
-/*
-|--------------------------------------------------------------------------
-| SERVICES
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   SERVICES
+========================================================= */
 
 const services = [
   "Video Editing",
@@ -57,16 +80,31 @@ const services = [
   "Social Media Design",
   "Thumbnail Design",
   "Motion Design",
+  "Photo Shoot",
+  "Model Shoot",
+  "Video Shoot",
+  "Product Photography",
+  "Event Photography",
+  "Corporate Photography",
   "Other",
 ];
+
+/* =========================================================
+   BUDGETS
+========================================================= */
 
 const budgets = [
   "₹5K – ₹15K",
   "₹15K – ₹30K",
   "₹30K – ₹50K",
-  "₹50K+",
+  "₹50K – ₹1L",
+  "₹1L+",
   "Let's discuss",
 ];
+
+/* =========================================================
+   TIMELINES
+========================================================= */
 
 const timelines = [
   "ASAP",
@@ -76,87 +114,102 @@ const timelines = [
   "Flexible",
 ];
 
-/*
-|--------------------------------------------------------------------------
-| SOCIAL ICONS
-|--------------------------------------------------------------------------
-| Inline SVGs are used because lucide-react does not provide official
-| Instagram / Behance / LinkedIn brand icons.
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   SERVICE PREVIEW
+========================================================= */
 
-function InstagramIcon({ size = 20 }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-    >
-      <rect
-        x="3"
-        y="3"
-        width="18"
-        height="18"
-        rx="5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
+const servicePreview = [
+  {
+    icon: Palette,
+    title: "Brand & Visuals",
+    description:
+      "Complete visual identities, logos, brand systems and creative direction.",
+    color: "violet",
+    number: "01",
+  },
+  {
+    icon: Video,
+    title: "Video & Motion",
+    description:
+      "Editing, motion graphics, reels, campaigns and cinematic content.",
+    color: "rose",
+    number: "02",
+  },
+  {
+    icon: Camera,
+    title: "Photo & Product",
+    description:
+      "Professional photography for products, brands, campaigns and social media.",
+    color: "amber",
+    number: "03",
+  },
+  {
+    icon: Users,
+    title: "Model & People",
+    description:
+      "Model shoots, portraits, fashion campaigns and lifestyle content.",
+    color: "cyan",
+    number: "04",
+  },
+  {
+    icon: Clapperboard,
+    title: "Video Production",
+    description:
+      "Concept-to-production video shoots for brands, creators and businesses.",
+    color: "emerald",
+    number: "05",
+  },
+  {
+    icon: ShoppingBag,
+    title: "Commercial Content",
+    description:
+      "Creative assets designed to showcase products and drive attention.",
+    color: "orange",
+    number: "06",
+  },
+  {
+    icon: Building2,
+    title: "Corporate",
+    description:
+      "Professional corporate photography and visual communication.",
+    color: "blue",
+    number: "07",
+  },
+];
 
-      <circle
-        cx="12"
-        cy="12"
-        r="4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
+/* =========================================================
+   ANIMATIONS
+========================================================= */
 
-      <circle
-        cx="17.4"
-        cy="6.7"
-        r="1.1"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 35,
+  },
 
-function BehanceIcon({ size = 20 }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M9.3 11.2c.9-.4 1.5-1.1 1.5-2.1 0-1.8-1.5-2.9-3.8-2.9H3v11.6h4.3c2.7 0 4.3-1.2 4.3-3.3 0-1.7-1-2.8-2.3-3.3ZM5.5 8.2h1.4c1.1 0 1.7.4 1.7 1.2 0 .8-.6 1.3-1.7 1.3H5.5V8.2Zm1.7 7.2H5.5v-2.8h1.7c1.2 0 1.9.5 1.9 1.4 0 .9-.7 1.4-1.9 1.4ZM17 9.2c-3 0-4.8 2-4.8 4.5 0 2.7 1.9 4.5 4.9 4.5 2.2 0 3.9-.9 4.5-2.7l-2.5-.8c-.3.8-1 1.2-2 1.2-1.2 0-1.9-.7-2-1.9h6.7v-.8c0-2.4-1.6-4-4.8-4Zm-1.8 3c.2-.9.8-1.5 1.8-1.5s1.6.5 1.7 1.5h-3.5ZM15.3 7h4.2v1.1h-4.2V7Z" />
-    </svg>
-  );
-}
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
-function LinkedInIcon({ size = 20 }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M5.2 8.2A1.8 1.8 0 1 0 5.2 4.6a1.8 1.8 0 0 0 0 3.6Z" />
-      <path d="M3.6 9.7h3.2V20H3.6V9.7Z" />
-      <path d="M9 9.7h3.1v1.4h.1c.4-.8 1.5-1.8 3.2-1.8 3.4 0 4 2.2 4 5.1V20h-3.2v-5c0-1.2 0-2.8-1.8-2.8s-2.1 1.3-2.1 2.7V20H9V9.7Z" />
-    </svg>
-  );
-}
+const staggerContainer = {
+  hidden: {},
 
-/*
-|--------------------------------------------------------------------------
-| CONTACT CARD
-|--------------------------------------------------------------------------
-*/
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+/* =========================================================
+   CONTACT CARD
+========================================================= */
 
 function ContactCard({
   icon: Icon,
@@ -165,60 +218,131 @@ function ContactCard({
   description,
   href,
   primary = false,
+  theme = "blue",
 }) {
+  const themes = {
+    blue: {
+      icon: "bg-blue-100 text-blue-600",
+      glow: "bg-blue-400/20",
+      border: "hover:border-blue-300",
+      hover: "group-hover:bg-blue-600",
+      label: "text-blue-600",
+      shadow: "hover:shadow-blue-100",
+    },
+
+    green: {
+      icon: "bg-emerald-100 text-emerald-600",
+      glow: "bg-emerald-400/20",
+      border: "hover:border-emerald-300",
+      hover: "group-hover:bg-emerald-600",
+      label: "text-emerald-600",
+      shadow: "hover:shadow-emerald-100",
+    },
+
+    violet: {
+      icon: "bg-violet-100 text-violet-600",
+      glow: "bg-violet-400/20",
+      border: "hover:border-violet-300",
+      hover: "group-hover:bg-violet-600",
+      label: "text-violet-600",
+      shadow: "hover:shadow-violet-100",
+    },
+  };
+
+  const currentTheme = themes[theme];
+
   const content = (
     <>
       <div
-        className={`absolute -right-12 -top-12 h-36 w-36 rounded-full blur-3xl transition-opacity duration-500 ${
-          primary
-            ? "bg-emerald-400/10 opacity-70 group-hover:opacity-100"
-            : "bg-violet-500/10 opacity-0 group-hover:opacity-100"
-        }`}
+        className={`
+          pointer-events-none
+          absolute
+          -right-20
+          -top-20
+          h-48
+          w-48
+          rounded-full
+          ${currentTheme.glow}
+          opacity-0
+          blur-3xl
+          transition-all
+          duration-700
+          group-hover:scale-150
+          group-hover:opacity-100
+        `}
       />
 
       <div className="relative flex items-start justify-between">
         <div
-          className={`flex h-12 w-12 items-center justify-center rounded-full border ${
-            primary
-              ? "border-emerald-400/20 bg-emerald-400/[0.08]"
-              : "border-white/10 bg-white/[0.04]"
-          }`}
+          className={`
+            flex
+            h-14
+            w-14
+            items-center
+            justify-center
+            rounded-2xl
+            border
+            border-white
+            ${currentTheme.icon}
+            shadow-sm
+            transition-all
+            duration-500
+            ${currentTheme.hover}
+            group-hover:text-white
+            group-hover:shadow-lg
+          `}
         >
-          <Icon
-            size={19}
-            strokeWidth={1.7}
-            className={
-              primary
-                ? "text-emerald-300"
-                : "text-white/60"
-            }
-          />
+          <Icon size={21} strokeWidth={1.8} />
         </div>
 
         <ArrowUpRight
-          size={18}
-          className="text-white/20 transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white"
+          size={19}
+          className="
+            text-slate-300
+            transition
+            duration-300
+            group-hover:-translate-y-1
+            group-hover:translate-x-1
+            group-hover:text-slate-800
+          "
         />
       </div>
 
       <div className="relative mt-7">
         <p
-          className={`text-[9px] uppercase tracking-[0.28em] ${
-            primary
-              ? "text-emerald-300/60"
-              : "text-white/30"
-          }`}
+          className={`
+            text-[10px]
+            font-black
+            uppercase
+            tracking-[0.25em]
+            ${currentTheme.label}
+          `}
         >
           {label}
         </p>
 
-        <p className="mt-2 break-all text-lg font-medium tracking-tight text-white">
+        <p className="mt-2 break-all text-lg font-black tracking-tight text-slate-950">
           {value}
         </p>
 
-        <p className="mt-2 text-sm leading-5 text-white/30">
+        <p className="mt-2 text-sm font-medium leading-6 text-slate-500">
           {description}
         </p>
+      </div>
+
+      <div className="relative mt-6 flex items-center gap-2 border-t border-slate-100 pt-5">
+        <span
+          className={`
+            h-1.5
+            w-1.5
+            rounded-full
+            ${currentTheme.icon.split(" ")[0]}
+          `}
+        />
+
+        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
+          Available channel
+        </span>
       </div>
     </>
   );
@@ -226,11 +350,23 @@ function ContactCard({
   if (!href) {
     return (
       <div
-        className={`group relative overflow-hidden rounded-[1.5rem] border p-6 ${
-          primary
-            ? "border-emerald-400/15 bg-emerald-400/[0.035]"
-            : "border-white/10 bg-white/[0.025]"
-        }`}
+        className={`
+          group
+          relative
+          overflow-hidden
+          rounded-[2rem]
+          border
+          border-slate-200
+          bg-white
+          p-6
+          shadow-sm
+          transition-all
+          duration-500
+          ${currentTheme.border}
+          ${currentTheme.shadow}
+          hover:-translate-y-2
+          hover:shadow-2xl
+        `}
       >
         {content}
       </div>
@@ -241,28 +377,177 @@ function ContactCard({
     <motion.a
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
-      rel={
-        href.startsWith("http")
-          ? "noopener noreferrer"
-          : undefined
-      }
-      whileHover={{ y: -4 }}
-      className={`group relative block overflow-hidden rounded-[1.5rem] border p-6 transition duration-300 ${
-        primary
-          ? "border-emerald-400/15 bg-emerald-400/[0.035] hover:border-emerald-400/30 hover:bg-emerald-400/[0.055]"
-          : "border-white/10 bg-white/[0.025] hover:border-white/20 hover:bg-white/[0.05]"
-      }`}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      whileHover={{ y: -7 }}
+      transition={{ duration: 0.25 }}
+      className={`
+        group
+        relative
+        block
+        overflow-hidden
+        rounded-[2rem]
+        border
+        border-slate-200
+        bg-white
+        p-6
+        shadow-sm
+        transition-all
+        duration-500
+        ${currentTheme.border}
+        ${currentTheme.shadow}
+        hover:shadow-2xl
+      `}
     >
       {content}
     </motion.a>
   );
 }
 
-/*
-|--------------------------------------------------------------------------
-| MAIN CONTACT COMPONENT
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   SOCIAL CARD
+========================================================= */
+
+function SocialCard({
+  href,
+  icon: Icon,
+  label,
+  handle,
+}) {
+  const socialStyles = {
+    Instagram: {
+      icon: "text-pink-500",
+      bg: "bg-pink-50",
+      border: "border-pink-100",
+      hover:
+        "group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:via-pink-500 group-hover:to-orange-400",
+    },
+
+    YouTube: {
+      icon: "text-red-600",
+      bg: "bg-red-50",
+      border: "border-red-100",
+      hover: "group-hover:bg-red-600",
+    },
+
+    LinkedIn: {
+      icon: "text-blue-600",
+      bg: "bg-blue-50",
+      border: "border-blue-100",
+      hover: "group-hover:bg-blue-600",
+    },
+
+    Facebook: {
+      icon: "text-blue-600",
+      bg: "bg-blue-50",
+      border: "border-blue-100",
+      hover: "group-hover:bg-blue-600",
+    },
+
+    GitHub: {
+      icon: "text-slate-900",
+      bg: "bg-slate-100",
+      border: "border-slate-200",
+      hover: "group-hover:bg-slate-950",
+    },
+
+    WhatsApp: {
+      icon: "text-emerald-600",
+      bg: "bg-emerald-50",
+      border: "border-emerald-100",
+      hover: "group-hover:bg-emerald-500",
+    },
+  };
+
+  const style = socialStyles[label] || {
+    icon: "text-slate-600",
+    bg: "bg-slate-50",
+    border: "border-slate-200",
+    hover: "group-hover:bg-slate-900",
+  };
+
+  return (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{
+        y: -5,
+        scale: 1.015,
+      }}
+      whileTap={{
+        scale: 0.98,
+      }}
+      className="
+        group
+        flex
+        items-center
+        gap-4
+        rounded-2xl
+        border
+        border-slate-200
+        bg-white
+        px-4
+        py-4
+        shadow-sm
+        transition-all
+        duration-300
+        hover:border-slate-300
+        hover:shadow-xl
+      "
+    >
+      <div
+        className={`
+          flex
+          h-11
+          w-11
+          shrink-0
+          items-center
+          justify-center
+          rounded-xl
+          border
+          ${style.border}
+          ${style.bg}
+          ${style.icon}
+          transition-all
+          duration-300
+          ${style.hover}
+          group-hover:border-transparent
+          group-hover:text-white
+        `}
+      >
+        <Icon size={19} />
+      </div>
+
+      <div className="min-w-0">
+        <p className="text-sm font-black text-slate-950">
+          {label}
+        </p>
+
+        <p className="mt-0.5 truncate text-xs font-medium text-slate-500">
+          {handle}
+        </p>
+      </div>
+
+      <ArrowUpRight
+        size={16}
+        className="
+          ml-auto
+          shrink-0
+          text-slate-300
+          transition
+          duration-300
+          group-hover:-translate-y-0.5
+          group-hover:translate-x-0.5
+          group-hover:text-slate-900
+        "
+      />
+    </motion.a>
+  );
+}
+
+/* =========================================================
+   MAIN CONTACT
+========================================================= */
 
 function Contact() {
   const [showForm, setShowForm] = useState(false);
@@ -277,6 +562,10 @@ function Contact() {
     message: "",
   });
 
+  /* =======================================================
+     FORM CHANGE
+  ======================================================= */
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -285,6 +574,10 @@ function Contact() {
       [name]: value,
     }));
   };
+
+  /* =======================================================
+     FORM SUBMIT
+  ======================================================= */
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -314,6 +607,10 @@ ${formData.message}
     setSubmitted(true);
   };
 
+  /* =======================================================
+     RESET FORM
+  ======================================================= */
+
   const resetForm = () => {
     setSubmitted(false);
 
@@ -330,7 +627,18 @@ ${formData.message}
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden border-t border-white/10 bg-[#070708] px-6 py-20 sm:py-24 lg:px-10 lg:py-28"
+      className="
+        relative
+        overflow-hidden
+        border-t
+        border-slate-200
+        bg-[#f7f7fb]
+        px-5
+        py-24
+        sm:px-6
+        lg:px-10
+        lg:py-32
+      "
     >
       {/* =====================================================
           BACKGROUND
@@ -339,192 +647,477 @@ ${formData.message}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
-            x: [0, 30, 0],
-            y: [0, -25, 0],
-            scale: [1, 1.08, 1],
+            x: [0, 50, 0],
+            y: [0, -35, 0],
+            scale: [1, 1.12, 1],
           }}
           transition={{
-            duration: 15,
+            duration: 18,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -left-48 -top-32 h-[500px] w-[500px] rounded-full bg-violet-600/[0.055] blur-[150px]"
+          className="
+            absolute
+            -left-64
+            -top-56
+            h-[650px]
+            w-[650px]
+            rounded-full
+            bg-violet-300/35
+            blur-[150px]
+          "
         />
 
         <motion.div
           animate={{
-            x: [0, -25, 0],
-            y: [0, 25, 0],
+            x: [0, -45, 0],
+            y: [0, 35, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 16,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+            absolute
+            -right-64
+            top-[15%]
+            h-[600px]
+            w-[600px]
+            rounded-full
+            bg-cyan-300/30
+            blur-[150px]
+          "
+        />
+
+        <motion.div
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.15, 0.35, 0.15],
           }}
           transition={{
             duration: 13,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute -right-48 top-1/3 h-[500px] w-[500px] rounded-full bg-cyan-500/[0.04] blur-[160px]"
+          className="
+            absolute
+            bottom-[-220px]
+            left-[30%]
+            h-[500px]
+            w-[500px]
+            rounded-full
+            bg-pink-300/25
+            blur-[140px]
+          "
         />
 
         <div
-          className="absolute inset-0 opacity-[0.015]"
+          className="
+            absolute
+            inset-0
+            opacity-[0.035]
+          "
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "100px 100px",
+              "linear-gradient(#475569 1px, transparent 1px), linear-gradient(90deg, #475569 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
           }}
         />
       </div>
 
+      {/* =====================================================
+          MAIN CONTAINER
+      ====================================================== */}
+
       <div className="relative mx-auto max-w-[1400px]">
 
-        {/* =====================================================
-            01 — CONTACT US HEADER
-        ====================================================== */}
+        {/* ===================================================
+            HERO
+        ==================================================== */}
 
-        <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="mb-6 flex items-center gap-3"
-            >
-              <span className="h-px w-10 bg-white/40" />
+        <div
+          className="
+            grid
+            gap-14
+            lg:grid-cols-[1.1fr_0.9fr]
+            lg:items-end
+          "
+        >
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            variants={fadeUp}
+          >
+            <div className="mb-8 flex items-center gap-3">
+              <span className="h-px w-12 bg-slate-400" />
 
-              <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">
-                Contact Us
+              <span
+                className="
+                  text-[10px]
+                  font-black
+                  uppercase
+                  tracking-[0.3em]
+                  text-slate-500
+                "
+              >
+                Contact / Start a project
               </span>
 
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]" />
-            </motion.div>
+              <span
+                className="
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-emerald-500
+                  shadow-[0_0_18px_rgba(16,185,129,0.65)]
+                "
+              />
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="max-w-5xl text-[clamp(3rem,7vw,7rem)] font-bold leading-[0.88] tracking-[-0.07em] text-white"
+            <h1
+              className="
+                max-w-6xl
+                text-[clamp(3.4rem,7.5vw,8rem)]
+                font-black
+                leading-[0.82]
+                tracking-[-0.085em]
+                text-slate-950
+              "
             >
-              LET'S GROW
+              LET'S MAKE
               <br />
 
-              <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
+              <span
+                className="
+                  bg-gradient-to-r
+                  from-violet-600
+                  via-fuchsia-500
+                  to-cyan-500
+                  bg-clip-text
+                  text-transparent
+                "
+              >
                 SOMETHING
               </span>
 
               <br />
 
-              GREAT.
-            </motion.h2>
-          </div>
+              MEMORABLE.
+            </h1>
+
+            <div className="mt-9 flex flex-wrap gap-2">
+              {[
+                "Branding",
+                "Photography",
+                "Video",
+                "Motion",
+                "Creative",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="
+                    rounded-full
+                    border
+                    border-slate-200
+                    bg-white/70
+                    px-4
+                    py-2
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    tracking-[0.15em]
+                    text-slate-500
+                    backdrop-blur
+                  "
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.6,
-              delay: 0.1,
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.2,
             }}
-            className="max-w-md lg:ml-auto"
+            transition={{
+              delay: 0.15,
+            }}
+            variants={fadeUp}
+            className="
+              relative
+              max-w-md
+              lg:ml-auto
+            "
           >
-            <p className="text-base leading-7 text-white/45 sm:text-lg">
-              Let's create visuals that make your brand,
-              content, or business impossible to ignore.
-            </p>
+            <div
+              className="
+                absolute
+                -left-8
+                -top-8
+                h-28
+                w-28
+                rounded-full
+                bg-violet-300/30
+                blur-3xl
+              "
+            />
 
-            <div className="mt-5 flex items-center gap-3">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/40" />
+            <div
+              className="
+                relative
+                rounded-[2rem]
+                border
+                border-white
+                bg-white/70
+                p-7
+                shadow-xl
+                shadow-slate-200/40
+                backdrop-blur-xl
+              "
+            >
+              <div
+                className="
+                  mb-7
+                  flex
+                  h-14
+                  w-14
+                  items-center
+                  justify-center
+                  rounded-2xl
+                  bg-gradient-to-br
+                  from-violet-500
+                  to-fuchsia-500
+                  text-white
+                  shadow-lg
+                  shadow-violet-300/40
+                "
+              >
+                <Sparkles
+                  size={21}
+                  strokeWidth={1.8}
+                />
+              </div>
 
-                <span className="relative h-2.5 w-2.5 rounded-full bg-emerald-400" />
-              </span>
+              <p
+                className="
+                  text-base
+                  font-semibold
+                  leading-7
+                  text-slate-800
+                  sm:text-lg
+                  sm:leading-8
+                "
+              >
+                Have an idea, a brand, a campaign,
+                a photoshoot or simply something you
+                want to make better?
+              </p>
 
-              <span className="text-[9px] uppercase tracking-[0.25em] text-white/30">
-                Available for selected projects
-              </span>
+              <p
+                className="
+                  mt-4
+                  text-sm
+                  font-medium
+                  leading-6
+                  text-slate-500
+                "
+              >
+                Tell us about it. We'll take it from there.
+              </p>
+
+              {/* <div
+                className="
+                  mt-3
+                  flex
+                  items-center
+                  gap-2
+                  border-t
+                  border-slate-50
+                  pt-3
+                "
+              > */}
+                {/* <span className="relative flex h-3 w-3">
+                  <span className="absolute inset-0 animate-ping rounded-full bg-emerald-100/10" />
+
+                  <span className="relative h-3 w-3 rounded-full bg-emerald-200" />
+                </span>
+
+                <span
+                  className="
+                    text-[4px]
+                    font-black
+                    uppercase
+                    tracking-[0.2em]
+                    text-slate-500
+                  "
+                >
+                  Available for selected projects
+                </span> */}
+              {/* </div> */}
             </div>
           </motion.div>
         </div>
 
-        {/* =====================================================
-            02 — DIRECT CONTACT INFORMATION
-        ====================================================== */}
+        {/* ===================================================
+            DIRECT CONTACT
+        ==================================================== */}
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-14 lg:grid-cols-3">
-
-          {/* PHONE */}
-
-          <ContactCard
-            icon={Phone}
-            label="Call Us"
-            value={contactInfo.phone}
-            description="Prefer a direct conversation?"
-            href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
-          />
-
-          {/* WHATSAPP */}
-
-          <ContactCard
-            icon={MessageCircle}
-            label="WhatsApp"
-            value="Start a conversation"
-            description="Quick questions, ideas & project enquiries"
-            href={`https://wa.me/${contactInfo.whatsapp}`}
-            primary
-          />
-
-          {/* EMAIL */}
-
-          <ContactCard
-            icon={Mail}
-            label="Email Us"
-            value={contactInfo.email}
-            description="For project details & collaborations"
-            href={`mailto:${contactInfo.email}`}
-          />
-        </div>
-
-        {/* =====================================================
-            03 — WEBSITE / LOCATION / AVAILABILITY
-        ====================================================== */}
-
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="rounded-2xl border border-white/10 bg-white/[0.02] p-5"
-          >
-            <p className="text-[9px] uppercase tracking-[0.25em] text-white/20">
-              Website
-            </p>
-
-            <p className="mt-2 text-sm text-white/55">
-              {contactInfo.website}
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.07 }}
-            className="rounded-2xl border border-white/10 bg-white/[0.02] p-5"
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.15,
+          }}
+          variants={fadeUp}
+          className="mt-20 sm:mt-24"
+        >
+          <div
+            className="
+              mb-7
+              flex
+              flex-col
+              gap-3
+              sm:flex-row
+              sm:items-center
+              sm:justify-between
+            "
           >
             <div className="flex items-center gap-3">
-              <MapPin
-                size={15}
-                className="text-white/30"
+              <span
+                className="
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-violet-500
+                "
               />
 
+              <p
+                className="
+                  text-[10px]
+                  font-black
+                  uppercase
+                  tracking-[0.3em]
+                  text-slate-500
+                "
+              >
+                Talk to us directly
+              </p>
+            </div>
+
+            <span
+              className="
+                text-[10px]
+                font-bold
+                uppercase
+                tracking-[0.25em]
+                text-slate-400
+              "
+            >
+              Choose your preferred channel
+            </span>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            <ContactCard
+              icon={Phone}
+              label="Call us"
+              value={contactInfo.phone}
+              description="Prefer a direct conversation?"
+              href={`tel:${contactInfo.phone.replace(
+                /\s/g,
+                ""
+              )}`}
+              theme="blue"
+            />
+
+            <ContactCard
+              icon={FaWhatsapp}
+              label="WhatsApp"
+              value="Start a conversation"
+              description="Quick questions, ideas & project enquiries"
+              href={`https://wa.me/${contactInfo.whatsapp}`}
+              primary
+              theme="green"
+            />
+
+            <ContactCard
+              icon={Mail}
+              label="Email us"
+              value={contactInfo.email}
+              description="For project details & collaborations"
+              href={`mailto:${contactInfo.email}`}
+              theme="violet"
+            />
+          </div>
+        </motion.div>
+
+        {/* ===================================================
+            INFO STRIP
+        ==================================================== */}
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.1,
+          }}
+          className="mt-5 grid gap-4 sm:grid-cols-3"
+        >
+          <motion.div
+            variants={fadeUp}
+            whileHover={{
+              y: -4,
+            }}
+            className="
+              group
+              rounded-2xl
+              border
+              border-blue-100
+              bg-gradient-to-br
+              from-blue-50
+              to-white
+              p-5
+              shadow-sm
+              transition-all
+              hover:shadow-lg
+            "
+          >
+            <div className="flex items-center gap-4">
+              <div
+                className="
+                  flex
+                  h-11
+                  w-11
+                  items-center
+                  justify-center
+                  rounded-xl
+                  bg-blue-100
+                  text-blue-600
+                "
+              >
+                <MapPin size={18} />
+              </div>
+
               <div>
-                <p className="text-[9px] uppercase tracking-[0.25em] text-white/20">
+                <p className="text-[9px] font-black uppercase tracking-[0.25em] text-blue-400">
                   Based in
                 </p>
 
-                <p className="mt-1 text-sm text-white/55">
+                <p className="mt-1 text-sm font-bold text-slate-800">
                   {contactInfo.location}
                 </p>
               </div>
@@ -532,225 +1125,682 @@ ${formData.message}
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.14 }}
-            className="rounded-2xl border border-emerald-400/10 bg-emerald-400/[0.025] p-5"
+            variants={fadeUp}
+            whileHover={{
+              y: -4,
+            }}
+            className="
+              group
+              rounded-2xl
+              border
+              border-violet-100
+              bg-gradient-to-br
+              from-violet-50
+              to-white
+              p-5
+              shadow-sm
+              transition-all
+              hover:shadow-lg
+            "
           >
-            <div className="flex items-center gap-3">
-              <Clock3
-                size={15}
-                className="text-emerald-300/60"
-              />
+            <div className="flex items-center gap-4">
+              <div
+                className="
+                  flex
+                  h-11
+                  w-11
+                  items-center
+                  justify-center
+                  rounded-xl
+                  bg-violet-100
+                  text-violet-600
+                "
+              >
+                <Globe size={18} />
+              </div>
 
               <div>
-                <p className="text-[9px] uppercase tracking-[0.25em] text-white/20">
+                <p className="text-[9px] font-black uppercase tracking-[0.25em] text-violet-400">
+                  Website
+                </p>
+
+                <p className="mt-1 text-sm font-bold text-slate-800">
+                  {contactInfo.website}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            whileHover={{
+              y: -4,
+            }}
+            className="
+              group
+              rounded-2xl
+              border
+              border-emerald-200
+              bg-gradient-to-br
+              from-emerald-50
+              to-white
+              p-5
+              shadow-sm
+              transition-all
+              hover:shadow-lg
+            "
+          >
+            <div className="flex items-center gap-4">
+              <div
+                className="
+                  flex
+                  h-11
+                  w-11
+                  items-center
+                  justify-center
+                  rounded-xl
+                  bg-emerald-100
+                  text-emerald-600
+                "
+              >
+                <Clock3 size={18} />
+              </div>
+
+              <div>
+                <p className="text-[9px] font-black uppercase tracking-[0.25em] text-emerald-500">
                   Availability
                 </p>
 
-                <p className="mt-1 text-sm text-emerald-300/70">
+                <p className="mt-1 text-sm font-bold text-emerald-700">
                   Selected projects
                 </p>
               </div>
             </div>
           </motion.div>
-        </div>
-
-        {/* =====================================================
-            04 — FOLLOW US
-        ====================================================== */}
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-12 grid gap-8 border-y border-white/10 py-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-center"
-        >
-          <div>
-            <p className="text-[9px] uppercase tracking-[0.28em] text-white/25">
-              Follow Us
-            </p>
-
-            <h3 className="mt-2 text-2xl font-medium tracking-tight text-white">
-              See what we're creating.
-            </h3>
-
-            <p className="mt-2 text-sm text-white/30">
-              Explore recent work, experiments, and creative projects.
-            </p>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-3">
-
-            {/* INSTAGRAM */}
-
-            <a
-              href={contactInfo.instagram.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-4 transition duration-300 hover:border-white/20 hover:bg-white/[0.05]"
-            >
-              <InstagramIcon
-                size={19}
-              />
-
-              <div>
-                <p className="text-xs font-medium text-white">
-                  Instagram
-                </p>
-
-                <p className="mt-0.5 text-[11px] text-white/30">
-                  {contactInfo.instagram.handle}
-                </p>
-              </div>
-
-              <ArrowUpRight
-                size={14}
-                className="ml-auto text-white/20 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
-              />
-            </a>
-
-            {/* BEHANCE */}
-
-            <a
-              href={contactInfo.behance.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-4 transition duration-300 hover:border-white/20 hover:bg-white/[0.05]"
-            >
-              <BehanceIcon
-                size={19}
-              />
-
-              <div>
-                <p className="text-xs font-medium text-white">
-                  Behance
-                </p>
-
-                <p className="mt-0.5 text-[11px] text-white/30">
-                  {contactInfo.behance.handle}
-                </p>
-              </div>
-
-              <ArrowUpRight
-                size={14}
-                className="ml-auto text-white/20 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
-              />
-            </a>
-
-            {/* LINKEDIN */}
-
-            <a
-              href={contactInfo.linkedin.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-4 transition duration-300 hover:border-white/20 hover:bg-white/[0.05]"
-            >
-              <LinkedInIcon
-                size={19}
-              />
-
-              <div>
-                <p className="text-xs font-medium text-white">
-                  LinkedIn
-                </p>
-
-                <p className="mt-0.5 text-[11px] text-white/30">
-                  {contactInfo.linkedin.handle}
-                </p>
-              </div>
-
-              <ArrowUpRight
-                size={14}
-                className="ml-auto text-white/20 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
-              />
-            </a>
-          </div>
         </motion.div>
 
-        {/* =====================================================
-            05 — START GROWING TODAY
-        ====================================================== */}
+        {/* ===================================================
+            SERVICES
+        ==================================================== */}
+
+        <section className="mt-28 sm:mt-32">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.15,
+            }}
+            variants={fadeUp}
+            className="
+              mb-11
+              flex
+              flex-col
+              justify-between
+              gap-7
+              sm:flex-row
+              sm:items-end
+            "
+          >
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full bg-fuchsia-500" />
+
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+                  What can we create?
+                </p>
+              </div>
+
+              <h2
+                className="
+                  mt-4
+                  max-w-3xl
+                  text-3xl
+                  font-black
+                  tracking-[-0.06em]
+                  text-slate-950
+                  sm:text-4xl
+                  lg:text-5xl
+                "
+              >
+                From a rough idea{" "}
+                <span
+                  className="
+                    bg-gradient-to-r
+                    from-violet-500
+                    to-cyan-500
+                    bg-clip-text
+                    text-transparent
+                  "
+                >
+                  to the final detail.
+                </span>
+              </h2>
+            </div>
+
+            <p
+              className="
+                max-w-sm
+                text-sm
+                font-medium
+                leading-6
+                text-slate-500
+              "
+            >
+              Don't worry if you don't know exactly
+              what you need. We can figure that out
+              together.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.1,
+            }}
+            className="
+              grid
+              gap-4
+              sm:grid-cols-2
+              lg:grid-cols-4
+            "
+          >
+            {servicePreview.map((item) => {
+              const Icon = item.icon;
+
+              const colors = {
+                violet: {
+                  icon: "bg-violet-100 text-violet-600",
+                  hover: "group-hover:bg-violet-600",
+                  border: "group-hover:border-violet-300",
+                  glow: "bg-violet-400/20",
+                  text: "text-violet-600",
+                },
+
+                rose: {
+                  icon: "bg-rose-100 text-rose-600",
+                  hover: "group-hover:bg-rose-600",
+                  border: "group-hover:border-rose-300",
+                  glow: "bg-rose-400/20",
+                  text: "text-rose-600",
+                },
+
+                amber: {
+                  icon: "bg-amber-100 text-amber-600",
+                  hover: "group-hover:bg-amber-500",
+                  border: "group-hover:border-amber-300",
+                  glow: "bg-amber-400/20",
+                  text: "text-amber-600",
+                },
+
+                cyan: {
+                  icon: "bg-cyan-100 text-cyan-600",
+                  hover: "group-hover:bg-cyan-500",
+                  border: "group-hover:border-cyan-300",
+                  glow: "bg-cyan-400/20",
+                  text: "text-cyan-600",
+                },
+
+                emerald: {
+                  icon: "bg-emerald-100 text-emerald-600",
+                  hover: "group-hover:bg-emerald-600",
+                  border: "group-hover:border-emerald-300",
+                  glow: "bg-emerald-400/20",
+                  text: "text-emerald-600",
+                },
+
+                orange: {
+                  icon: "bg-orange-100 text-orange-600",
+                  hover: "group-hover:bg-orange-500",
+                  border: "group-hover:border-orange-300",
+                  glow: "bg-orange-400/20",
+                  text: "text-orange-600",
+                },
+
+                blue: {
+                  icon: "bg-blue-100 text-blue-600",
+                  hover: "group-hover:bg-blue-600",
+                  border: "group-hover:border-blue-300",
+                  glow: "bg-blue-400/20",
+                  text: "text-blue-600",
+                },
+              };
+
+              const theme = colors[item.color];
+
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={fadeUp}
+                  whileHover={{
+                    y: -8,
+                  }}
+                  className={`
+                    group
+                    relative
+                    overflow-hidden
+                    rounded-[2rem]
+                    border
+                    border-slate-200
+                    bg-white
+                    p-6
+                    shadow-sm
+                    transition-all
+                    duration-500
+                    ${theme.border}
+                    hover:shadow-2xl
+                  `}
+                >
+                  <div
+                    className={`
+                      pointer-events-none
+                      absolute
+                      -right-20
+                      -top-20
+                      h-48
+                      w-48
+                      rounded-full
+                      ${theme.glow}
+                      opacity-0
+                      blur-3xl
+                      transition-all
+                      duration-500
+                      group-hover:scale-150
+                      group-hover:opacity-100
+                    `}
+                  />
+
+                  <div className="relative flex items-center justify-between">
+                    <div
+                      className={`
+                        flex
+                        h-14
+                        w-14
+                        items-center
+                        justify-center
+                        rounded-2xl
+                        ${theme.icon}
+                        transition-all
+                        duration-500
+                        ${theme.hover}
+                        group-hover:text-white
+                        group-hover:shadow-lg
+                      `}
+                    >
+                      <Icon size={23} strokeWidth={1.8} />
+                    </div>
+
+                    <span className="text-[11px] font-black tracking-[0.2em] text-slate-300">
+                      {item.number}
+                    </span>
+                  </div>
+
+                  <div className="relative mt-7">
+                    <h3 className="text-lg font-black tracking-tight text-slate-950">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-3 text-sm font-medium leading-6 text-slate-500">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <div
+                    className="
+                      relative
+                      mt-7
+                      flex
+                      items-center
+                      justify-between
+                      border-t
+                      border-slate-100
+                      pt-5
+                    "
+                  >
+                    <span
+                      className={`
+                        text-[9px]
+                        font-black
+                        uppercase
+                        tracking-[0.2em]
+                        ${theme.text}
+                        opacity-70
+                      `}
+                    >
+                      Creative service
+                    </span>
+
+                    <div
+                      className={`
+                        flex
+                        h-8
+                        w-8
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-slate-200
+                        text-slate-400
+                        transition-all
+                        duration-300
+                        ${theme.hover}
+                        group-hover:border-transparent
+                        group-hover:text-white
+                      `}
+                    >
+                      <ArrowUpRight size={14} />
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </section>
+
+        {/* ===================================================
+            CTA
+        ==================================================== */}
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mt-12 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.025]"
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          transition={{
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="
+            relative
+            mt-28
+            overflow-hidden
+            rounded-[2.5rem]
+            border
+            border-slate-800
+            bg-slate-950
+            shadow-2xl
+            shadow-slate-300/50
+          "
         >
-          <div className="relative p-7 sm:p-9 lg:p-12">
+          {/* CTA gradients */}
 
-            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-violet-500/[0.07] blur-[100px]" />
+          <div
+            className="
+              pointer-events-none
+              absolute
+              -right-40
+              -top-40
+              h-[500px]
+              w-[500px]
+              rounded-full
+              bg-violet-600/25
+              blur-[120px]
+            "
+          />
 
-            <div className="pointer-events-none absolute -bottom-24 left-1/3 h-64 w-64 rounded-full bg-cyan-500/[0.05] blur-[100px]" />
+          <div
+            className="
+              pointer-events-none
+              absolute
+              -bottom-40
+              left-1/3
+              h-[450px]
+              w-[450px]
+              rounded-full
+              bg-cyan-500/20
+              blur-[120px]
+            "
+          />
 
-            <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div
+            className="
+              pointer-events-none
+              absolute
+              left-[-100px]
+              top-1/2
+              h-[300px]
+              w-[300px]
+              -translate-y-1/2
+              rounded-full
+              bg-fuchsia-500/15
+              blur-[100px]
+            "
+          />
 
+          {/* Grid */}
+
+          <div
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+              opacity-[0.08]
+            "
+            style={{
+              backgroundImage:
+                "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
+              backgroundSize: "55px 55px",
+            }}
+          />
+
+          <div className="relative p-7 sm:p-10 lg:p-14">
+            <div
+              className="
+                grid
+                gap-12
+                lg:grid-cols-[1fr_auto]
+                lg:items-center
+              "
+            >
               <div>
-                <p className="text-[9px] uppercase tracking-[0.3em] text-white/25">
-                  Start Growing Today
-                </p>
+                <div className="flex items-center gap-3">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400" />
 
-                <h3 className="mt-3 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl lg:text-5xl">
+                  <span
+                    className="
+                      text-[10px]
+                      font-black
+                      uppercase
+                      tracking-[0.3em]
+                      text-slate-400
+                    "
+                  >
+                    Start a project
+                  </span>
+
+                  <span className="h-px w-10 bg-slate-700" />
+                </div>
+
+                <h2
+                  className="
+                    mt-5
+                    max-w-3xl
+                    text-3xl
+                    font-black
+                    tracking-[-0.06em]
+                    text-white
+                    sm:text-4xl
+                    lg:text-6xl
+                  "
+                >
                   Have an idea?
                   <br />
 
-                  <span className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
-                    Let's make it happen.
+                  <span
+                    className="
+                      bg-gradient-to-r
+                      from-violet-400
+                      via-fuchsia-400
+                      to-cyan-400
+                      bg-clip-text
+                      text-transparent
+                    "
+                  >
+                    Let's make it real.
                   </span>
-                </h3>
+                </h2>
 
-                <p className="mt-4 max-w-2xl text-sm leading-6 text-white/35 sm:text-base">
-                  Get in touch for a quick conversation about your
-                  project, goals, and how we can bring the idea to life.
+                <p
+                  className="
+                    mt-5
+                    max-w-2xl
+                    text-sm
+                    font-medium
+                    leading-7
+                    text-slate-400
+                  "
+                >
+                  Share a few details about your project.
+                  You don't need a perfect brief — just
+                  start the conversation.
                 </p>
+
+                <div className="mt-7 flex flex-wrap gap-2">
+                  {[
+                    "Creative Direction",
+                    "Production",
+                    "Design",
+                  ].map((item) => (
+                    <span
+                      key={item}
+                      className="
+                        rounded-full
+                        border
+                        border-white/10
+                        bg-white/5
+                        px-4
+                        py-2
+                        text-[9px]
+                        font-bold
+                        uppercase
+                        tracking-[0.15em]
+                        text-slate-400
+                      "
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-
-                <a
+                <motion.a
+                  whileHover={{
+                    scale: 1.03,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
                   href={`https://wa.me/${contactInfo.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-semibold text-black transition duration-300 hover:scale-[1.03]"
+                  className="
+                    group
+                    inline-flex
+                    min-w-[210px]
+                    items-center
+                    justify-center
+                    gap-3
+                    rounded-full
+                    bg-emerald-500
+                    px-7
+                    py-4
+                    text-sm
+                    font-black
+                    text-white
+                    shadow-xl
+                    shadow-emerald-900/30
+                    transition
+                    hover:bg-emerald-400
+                  "
                 >
-                  WhatsApp Us
+                  <FaWhatsapp size={19} />
 
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-white">
+                  WhatsApp us
+
+                  <span
+                    className="
+                      flex
+                      h-7
+                      w-7
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-black/10
+                    "
+                  >
                     <ArrowUpRight
                       size={14}
-                      className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                      className="
+                        transition
+                        group-hover:-translate-y-0.5
+                        group-hover:translate-x-0.5
+                      "
                     />
                   </span>
-                </a>
+                </motion.a>
 
-                <button
+                <motion.button
+                  whileHover={{
+                    scale: 1.03,
+                  }}
+                  whileTap={{
+                    scale: 0.97,
+                  }}
                   type="button"
-                  onClick={() => setShowForm((previous) => !previous)}
-                  className="group inline-flex items-center justify-center gap-3 rounded-full border border-white/10 px-7 py-4 text-sm font-medium text-white transition duration-300 hover:border-white/25 hover:bg-white/[0.05]"
+                  onClick={() =>
+                    setShowForm((previous) => !previous)
+                  }
+                  className="
+                    group
+                    inline-flex
+                    min-w-[210px]
+                    items-center
+                    justify-center
+                    gap-3
+                    rounded-full
+                    border
+                    border-white/15
+                    bg-white/5
+                    px-7
+                    py-4
+                    text-sm
+                    font-bold
+                    text-white
+                    backdrop-blur
+                    transition
+                    hover:border-white/25
+                    hover:bg-white/10
+                  "
                 >
                   Send a project brief
 
                   <ChevronDown
-                    size={16}
+                    size={17}
                     className={`transition duration-300 ${
-                      showForm
-                        ? "rotate-180"
-                        : ""
+                      showForm ? "rotate-180" : ""
                     }`}
                   />
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* =====================================================
-            06 — OPTIONAL PROJECT FORM
-        ====================================================== */}
+        {/* ===================================================
+            FORM
+        ==================================================== */}
 
         <AnimatePresence initial={false}>
           {showForm && (
@@ -768,45 +1818,108 @@ ${formData.message}
                 height: 0,
               }}
               transition={{
-                duration: 0.45,
-                ease: "easeInOut",
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1],
               }}
               className="overflow-hidden"
             >
-              <div className="mt-4 rounded-[2rem] border border-white/10 bg-white/[0.02] p-7 sm:p-9 lg:p-10">
-
+              <div
+                className="
+                  mt-5
+                  overflow-hidden
+                  rounded-[2.5rem]
+                  border
+                  border-violet-200
+                  bg-white
+                  shadow-2xl
+                  shadow-violet-100/60
+                "
+              >
                 {!submitted ? (
-                  <>
-                    {/* FORM HEADER */}
+                  <div className="p-6 sm:p-9 lg:p-12">
+                    <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="max-w-2xl">
+                        <div className="flex items-center gap-3">
+                          <div
+                            className="
+                              flex
+                              h-10
+                              w-10
+                              items-center
+                              justify-center
+                              rounded-xl
+                              bg-violet-100
+                              text-violet-600
+                            "
+                          >
+                            <MessageCircle size={18} />
+                          </div>
 
-                    <div className="max-w-2xl">
-                      <p className="text-[9px] uppercase tracking-[0.28em] text-white/25">
-                        Project Enquiry
-                      </p>
+                          <p className="text-[10px] font-black uppercase tracking-[0.28em] text-violet-600">
+                            Project enquiry
+                          </p>
+                        </div>
 
-                      <h4 className="mt-3 text-2xl font-medium tracking-tight text-white sm:text-3xl">
-                        Tell us what you're building.
-                      </h4>
+                        <h3
+                          className="
+                            mt-5
+                            text-2xl
+                            font-black
+                            tracking-tight
+                            text-slate-950
+                            sm:text-3xl
+                          "
+                        >
+                          Tell us what you're building.
+                        </h3>
 
-                      <p className="mt-2 text-sm leading-6 text-white/35">
-                        A few details are enough. This will prepare
-                        your enquiry for WhatsApp.
-                      </p>
+                        <p className="mt-2 text-sm font-medium leading-6 text-slate-500">
+                          A few details are enough to get
+                          the conversation started.
+                        </p>
+                      </div>
+
+                      <div
+                        className="
+                          hidden
+                          h-20
+                          w-20
+                          items-center
+                          justify-center
+                          rounded-3xl
+                          bg-gradient-to-br
+                          from-violet-100
+                          via-fuchsia-100
+                          to-cyan-100
+                          sm:flex
+                        "
+                      >
+                        <Sparkles
+                          size={30}
+                          className="text-violet-500"
+                        />
+                      </div>
                     </div>
 
                     <form
                       onSubmit={handleSubmit}
-                      className="mt-8 space-y-6"
+                      className="mt-10 space-y-7"
                     >
-
                       {/* NAME + EMAIL */}
 
                       <div className="grid gap-5 sm:grid-cols-2">
-
                         <div>
                           <label
                             htmlFor="contact-name"
-                            className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/30"
+                            className="
+                              mb-2
+                              block
+                              text-[10px]
+                              font-black
+                              uppercase
+                              tracking-[0.2em]
+                              text-slate-500
+                            "
                           >
                             Your name
                           </label>
@@ -818,14 +1931,41 @@ ${formData.message}
                             onChange={handleChange}
                             required
                             placeholder="Your name"
-                            className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/15 focus:border-white/30"
+                            className="
+                              w-full
+                              rounded-2xl
+                              border
+                              border-slate-200
+                              bg-slate-50
+                              px-4
+                              py-4
+                              text-sm
+                              font-semibold
+                              text-slate-900
+                              outline-none
+                              transition-all
+                              placeholder:text-slate-400
+                              hover:border-violet-200
+                              focus:border-violet-500
+                              focus:bg-white
+                              focus:ring-4
+                              focus:ring-violet-500/10
+                            "
                           />
                         </div>
 
                         <div>
                           <label
                             htmlFor="contact-email"
-                            className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/30"
+                            className="
+                              mb-2
+                              block
+                              text-[10px]
+                              font-black
+                              uppercase
+                              tracking-[0.2em]
+                              text-slate-500
+                            "
                           >
                             Email
                           </label>
@@ -838,7 +1978,26 @@ ${formData.message}
                             onChange={handleChange}
                             required
                             placeholder="you@company.com"
-                            className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-4 text-sm text-white outline-none transition placeholder:text-white/15 focus:border-white/30"
+                            className="
+                              w-full
+                              rounded-2xl
+                              border
+                              border-slate-200
+                              bg-slate-50
+                              px-4
+                              py-4
+                              text-sm
+                              font-semibold
+                              text-slate-900
+                              outline-none
+                              transition-all
+                              placeholder:text-slate-400
+                              hover:border-violet-200
+                              focus:border-violet-500
+                              focus:bg-white
+                              focus:ring-4
+                              focus:ring-violet-500/10
+                            "
                           />
                         </div>
                       </div>
@@ -848,7 +2007,15 @@ ${formData.message}
                       <div>
                         <label
                           htmlFor="contact-service"
-                          className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/30"
+                          className="
+                            mb-2
+                            block
+                            text-[10px]
+                            font-black
+                            uppercase
+                            tracking-[0.2em]
+                            text-slate-500
+                          "
                         >
                           What do you need?
                         </label>
@@ -859,13 +2026,27 @@ ${formData.message}
                           value={formData.service}
                           onChange={handleChange}
                           required
-                          className="w-full rounded-xl border border-white/10 bg-black/30 px-4 py-4 text-sm text-white outline-none transition focus:border-white/30"
+                          className="
+                            w-full
+                            rounded-2xl
+                            border
+                            border-slate-200
+                            bg-slate-50
+                            px-4
+                            py-4
+                            text-sm
+                            font-semibold
+                            text-slate-900
+                            outline-none
+                            transition-all
+                            hover:border-violet-200
+                            focus:border-violet-500
+                            focus:bg-white
+                            focus:ring-4
+                            focus:ring-violet-500/10
+                          "
                         >
-                          <option
-                            value=""
-                            disabled
-                            className="bg-black"
-                          >
+                          <option value="" disabled>
                             Select a service
                           </option>
 
@@ -873,7 +2054,6 @@ ${formData.message}
                             <option
                               key={service}
                               value={service}
-                              className="bg-black"
                             >
                               {service}
                             </option>
@@ -884,33 +2064,56 @@ ${formData.message}
                       {/* BUDGET */}
 
                       <div>
-                        <p className="mb-3 text-[9px] uppercase tracking-[0.2em] text-white/30">
+                        <p
+                          className="
+                            mb-3
+                            text-[10px]
+                            font-black
+                            uppercase
+                            tracking-[0.2em]
+                            text-slate-500
+                          "
+                        >
                           Approximate budget
                         </p>
 
-                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
                           {budgets.map((budget) => {
                             const active =
                               formData.budget === budget;
 
                             return (
-                              <button
+                              <motion.button
                                 key={budget}
                                 type="button"
+                                whileTap={{
+                                  scale: 0.97,
+                                }}
                                 onClick={() =>
-                                  setFormData((previous) => ({
-                                    ...previous,
-                                    budget,
-                                  }))
+                                  setFormData(
+                                    (previous) => ({
+                                      ...previous,
+                                      budget,
+                                    })
+                                  )
                                 }
-                                className={`rounded-xl border px-3 py-3 text-xs transition ${
-                                  active
-                                    ? "border-white bg-white text-black"
-                                    : "border-white/10 bg-black/20 text-white/40 hover:border-white/25 hover:text-white"
-                                }`}
+                                className={`
+                                  rounded-2xl
+                                  border
+                                  px-3
+                                  py-3.5
+                                  text-xs
+                                  font-bold
+                                  transition-all
+                                  ${
+                                    active
+                                      ? "border-violet-600 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-200"
+                                      : "border-slate-200 bg-slate-50 text-slate-600 hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700"
+                                  }
+                                `}
                               >
                                 {budget}
-                              </button>
+                              </motion.button>
                             );
                           })}
                         </div>
@@ -919,33 +2122,56 @@ ${formData.message}
                       {/* TIMELINE */}
 
                       <div>
-                        <p className="mb-3 text-[9px] uppercase tracking-[0.2em] text-white/30">
+                        <p
+                          className="
+                            mb-3
+                            text-[10px]
+                            font-black
+                            uppercase
+                            tracking-[0.2em]
+                            text-slate-500
+                          "
+                        >
                           Timeline
                         </p>
 
-                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
                           {timelines.map((timeline) => {
                             const active =
                               formData.timeline === timeline;
 
                             return (
-                              <button
+                              <motion.button
                                 key={timeline}
                                 type="button"
+                                whileTap={{
+                                  scale: 0.97,
+                                }}
                                 onClick={() =>
-                                  setFormData((previous) => ({
-                                    ...previous,
-                                    timeline,
-                                  }))
+                                  setFormData(
+                                    (previous) => ({
+                                      ...previous,
+                                      timeline,
+                                    })
+                                  )
                                 }
-                                className={`rounded-xl border px-3 py-3 text-xs transition ${
-                                  active
-                                    ? "border-white bg-white text-black"
-                                    : "border-white/10 bg-black/20 text-white/40 hover:border-white/25 hover:text-white"
-                                }`}
+                                className={`
+                                  rounded-2xl
+                                  border
+                                  px-3
+                                  py-3.5
+                                  text-xs
+                                  font-bold
+                                  transition-all
+                                  ${
+                                    active
+                                      ? "border-cyan-600 bg-cyan-600 text-white shadow-lg shadow-cyan-200"
+                                      : "border-slate-200 bg-slate-50 text-slate-600 hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700"
+                                  }
+                                `}
                               >
                                 {timeline}
-                              </button>
+                              </motion.button>
                             );
                           })}
                         </div>
@@ -956,7 +2182,15 @@ ${formData.message}
                       <div>
                         <label
                           htmlFor="contact-message"
-                          className="mb-2 block text-[9px] uppercase tracking-[0.2em] text-white/30"
+                          className="
+                            mb-2
+                            block
+                            text-[10px]
+                            font-black
+                            uppercase
+                            tracking-[0.2em]
+                            text-slate-500
+                          "
                         >
                           Project details
                         </label>
@@ -967,71 +2201,205 @@ ${formData.message}
                           value={formData.message}
                           onChange={handleChange}
                           required
-                          rows={5}
-                          placeholder="Tell us about your idea, brand, campaign, video, or project..."
-                          className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-4 text-sm leading-6 text-white outline-none transition placeholder:text-white/15 focus:border-white/30"
+                          rows={6}
+                          placeholder="Tell us about your idea, brand, campaign, photoshoot, video or project..."
+                          className="
+                            w-full
+                            resize-none
+                            rounded-2xl
+                            border
+                            border-slate-200
+                            bg-slate-50
+                            px-4
+                            py-4
+                            text-sm
+                            font-semibold
+                            leading-6
+                            text-slate-900
+                            outline-none
+                            transition-all
+                            placeholder:text-slate-400
+                            hover:border-violet-200
+                            focus:border-violet-500
+                            focus:bg-white
+                            focus:ring-4
+                            focus:ring-violet-500/10
+                          "
                         />
                       </div>
 
                       {/* SUBMIT */}
 
-                      <div className="flex flex-col gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                        <p className="max-w-md text-xs leading-5 text-white/25">
-                          You don't need a perfect brief.
-                          Just tell us what you're trying to create.
-                        </p>
+                      <div
+                        className="
+                          flex
+                          flex-col
+                          gap-5
+                          border-t
+                          border-slate-100
+                          pt-7
+                          sm:flex-row
+                          sm:items-center
+                          sm:justify-between
+                        "
+                      >
+                        <div className="flex items-start gap-3">
+                          <Sparkles
+                            size={15}
+                            className="mt-0.5 shrink-0 text-violet-500"
+                          />
 
-                        <button
+                          <p className="max-w-md text-xs font-medium leading-5 text-slate-500">
+                            You don't need a perfect brief.
+                            Just tell us what you're trying
+                            to create.
+                          </p>
+                        </div>
+
+                        <motion.button
+                          whileHover={{
+                            scale: 1.03,
+                          }}
+                          whileTap={{
+                            scale: 0.97,
+                          }}
                           type="submit"
-                          className="group inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-semibold text-black transition duration-300 hover:scale-[1.03]"
+                          className="
+                            group
+                            inline-flex
+                            shrink-0
+                            items-center
+                            justify-center
+                            gap-3
+                            rounded-full
+                            bg-gradient-to-r
+                            from-violet-600
+                            via-fuchsia-600
+                            to-cyan-500
+                            px-7
+                            py-4
+                            text-sm
+                            font-black
+                            text-white
+                            shadow-xl
+                            shadow-violet-200
+                            transition
+                            hover:shadow-2xl
+                          "
                         >
                           Send enquiry
 
-                          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-black text-white">
+                          <span
+                            className="
+                              flex
+                              h-7
+                              w-7
+                              items-center
+                              justify-center
+                              rounded-full
+                              bg-white/15
+                            "
+                          >
                             <Send
-                              size={13}
-                              className="transition group-hover:translate-x-0.5"
+                              size={14}
+                              className="
+                                transition
+                                group-hover:translate-x-1
+                              "
                             />
                           </span>
-                        </button>
+                        </motion.button>
                       </div>
                     </form>
-                  </>
+                  </div>
                 ) : (
-                  /* SUCCESS STATE */
-
                   <motion.div
                     initial={{
                       opacity: 0,
-                      scale: 0.98,
+                      scale: 0.95,
                     }}
                     animate={{
                       opacity: 1,
                       scale: 1,
                     }}
-                    className="flex min-h-[320px] flex-col items-center justify-center text-center"
+                    className="
+                      flex
+                      min-h-[430px]
+                      flex-col
+                      items-center
+                      justify-center
+                      px-7
+                      py-7
+                      text-center
+                    "
                   >
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-emerald-400/20 bg-emerald-400/10">
-                      <Check
-                        size={28}
-                        className="text-emerald-300"
-                      />
+                    <div className="relative">
+                      <div className="absolute inset-0 animate-ping rounded-full bg-emerald-400/20" />
+
+                      <div
+                        className="
+                          relative
+                          flex
+                          h-24
+                          w-24
+                          items-center
+                          justify-center
+                          rounded-full
+                          border
+                          border-emerald-200
+                          bg-emerald-50
+                          shadow-xl
+                          shadow-emerald-100
+                        "
+                      >
+                        <CheckCircle2
+                          size={40}
+                          strokeWidth={1.7}
+                          className="text-emerald-500"
+                        />
+                      </div>
                     </div>
 
-                    <h4 className="mt-6 text-2xl font-semibold text-white">
+                    <h3
+                      className="
+                        mt-8
+                        text-2xl
+                        font-black
+                        text-slate-950
+                        sm:text-3xl
+                      "
+                    >
                       Your enquiry is ready.
-                    </h4>
+                    </h3>
 
-                    <p className="mt-3 max-w-md text-sm leading-6 text-white/40">
-                      WhatsApp should have opened with your
-                      project details. Send the message there
-                      to start the conversation.
+                    <p className="mt-3 max-w-md text-sm font-medium leading-7 text-slate-500">
+                      WhatsApp should have opened with
+                      your project details. Send the
+                      message there to start the
+                      conversation.
                     </p>
 
                     <button
                       type="button"
                       onClick={resetForm}
-                      className="mt-7 text-xs uppercase tracking-[0.2em] text-white/30 transition hover:text-white"
+                      className="
+                        mt-8
+                        rounded-full
+                        border
+                        border-slate-200
+                        bg-white
+                        px-5
+                        py-3
+                        text-[10px]
+                        font-black
+                        uppercase
+                        tracking-[0.25em]
+                        text-slate-500
+                        transition
+                        hover:border-violet-300
+                        hover:bg-violet-50
+                        hover:text-violet-700
+                      "
                     >
                       Send another enquiry
                     </button>
@@ -1042,27 +2410,74 @@ ${formData.message}
           )}
         </AnimatePresence>
 
-        {/* =====================================================
-            07 — FINAL BUSINESS MESSAGE
-        ====================================================== */}
+      {/* ===================================================
+    SOCIALS
+==================================================== */}
 
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between"
-        >
-          <p className="text-xs uppercase tracking-[0.22em] text-white/20">
-            Your idea. Our creativity. Let's build something memorable.
-          </p>
+<section className="mt-16 border-y border-slate-200 py-7">
+  <div
+    className="
+      grid
+      gap-6
+      lg:grid-cols-[0.7fr_1.3fr]
+      lg:items-center
+    "
+  >
+    {/* SOCIAL INTRO */}
 
-          <div className="flex items-center gap-2 text-xs text-white/25">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+    <div>
+      <p className="text-[9px] font-black uppercase tracking-[0.25em] text-slate-500">
+        Follow the studio
+      </p>
 
-            {contactInfo.location}
-          </div>
-        </motion.div>
+      <h3 className="mt-2 text-2xl font-black tracking-tight text-slate-950">
+        See what we're creating.
+      </h3>
+
+      <p className="mt-1 text-sm font-medium text-slate-600">
+        Work, experiments, ideas and creative projects.
+      </p>
+    </div>
+
+    {/* SOCIAL CARDS */}
+
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      className="grid gap-3 sm:grid-cols-3"
+    >
+      <motion.div variants={fadeUp}>
+        <SocialCard
+          href={contactInfo.instagram.url}
+          icon={FaInstagram}
+          label="Instagram"
+          handle={contactInfo.instagram.handle}
+        />
+      </motion.div>
+
+      <motion.div variants={fadeUp}>
+        <SocialCard
+          href={contactInfo.youtube.url}
+          icon={FaYoutube}
+          label="YouTube"
+          handle={contactInfo.youtube.handle}
+        />
+      </motion.div>
+
+      <motion.div variants={fadeUp}>
+        <SocialCard
+          href={contactInfo.facebook.url}
+          icon={FaFacebookF}
+          label="Facebook"
+          handle={contactInfo.facebook.handle}
+        />
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
+
       </div>
     </section>
   );

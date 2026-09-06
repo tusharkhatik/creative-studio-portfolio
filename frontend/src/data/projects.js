@@ -1,211 +1,139 @@
 export const projects = [
   {
-    id: 1,
-    title: "Neon Nights",
+    id: "project-01",
+    title: "Creative Campaign",
     category: "Video",
     year: "2026",
     type: "video",
-    featured: true,
+
     image:
-      "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "A cinematic night campaign built around neon light, movement, atmosphere, and rhythmic editing.",
+      "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=80",
+
+    video:
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+
+    size: "tall",
   },
 
   {
-    id: 2,
-    title: "Fragments of Light",
-    category: "Photo",
-    year: "2026",
-    type: "image",
-    featured: true,
-    image:
-      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "An atmospheric photo series exploring contrast, shadows, architecture, and cinematic color.",
-  },
-
-  {
-    id: 3,
-    title: "NOVA",
-    category: "Logo",
-    year: "2026",
-    type: "image",
-    featured: true,
-    image:
-      "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "A futuristic identity concept created for a next-generation technology and lifestyle brand.",
-  },
-
-  {
-    id: 4,
-    title: "SIGNAL / 01",
-    category: "Motion",
-    year: "2026",
-    type: "video",
-    featured: true,
-    image:
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "An experimental motion piece combining kinetic typography, digital distortion, light, and sound.",
-  },
-
-  {
-    id: 5,
-    title: "Golden Hour",
-    category: "Photo",
-    year: "2026",
-    type: "image",
-    featured: true,
-    image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "A warm editorial series focused on natural light, human moments, subtle retouching, and cinematic tones.",
-  },
-
-  {
-    id: 6,
-    title: "VOID",
+    id: "project-02",
+    title: "Brand Identity",
     category: "Branding",
     year: "2026",
     type: "image",
-    featured: true,
+
     image:
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "A bold monochrome identity system built around negative space, typography, and visual tension.",
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1200&q=80",
+
+    size: "portrait",
   },
 
   {
-    id: 7,
-    title: "After Dark",
-    category: "Video",
-    year: "2026",
+    id: "project-03",
+    title: "Digital Experience",
+    category: "Motion",
+    year: "2025",
     type: "video",
-    featured: true,
+
     image:
-      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "A dark visual campaign exploring urban nightlife through cinematic pacing and dramatic lighting.",
+      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1200&q=80",
+
+    video:
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+
+    size: "square",
   },
 
   {
-    id: 8,
-    title: "FORM / 26",
-    category: "Logo",
+    id: "project-04",
+    title: "Visual Story",
+    category: "Photo",
     year: "2026",
     type: "image",
-    featured: true,
+
     image:
-      "https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "A geometric logo exploration focused on form, balance, proportion, and contemporary visual identity.",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
+
+    size: "wide",
   },
 
   {
-    id: 9,
-    title: "PULSE",
-    category: "Motion",
-    year: "2026",
+    id: "project-05",
+    title: "Social Campaign",
+    category: "Video",
+    year: "2025",
     type: "video",
-    featured: true,
+
     image:
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=85",
-    video: "",
-    description:
-      "A high-energy motion experiment where typography reacts to rhythm, creating a constantly moving visual system.",
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80",
+
+    video:
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+
+    size: "portrait",
   },
 
-//   {
-//     id: 10,
-//     title: "MOTION / MATTER",
-//     category: "Motion",
-//     year: "2026",
-//     type: "video",
-//     featured: false,
-//     image:
-//       "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1600&q=85",
-//     video: "",
-//     description:
-//       "An abstract motion study exploring scale, depth, light, and movement through digital composition.",
-//   },
+  {
+    id: "project-06",
+    title: "Logo System",
+    category: "Logo",
+    year: "2025",
+    type: "image",
 
-//   {
-//     id: 11,
-//     title: "NOIR",
-//     category: "Branding",
-//     year: "2026",
-//     type: "image",
-//     featured: false,
-//     image:
-//       "https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=1600&q=85",
-//     video: "",
-//     description:
-//       "A premium fashion identity concept built around editorial typography, restraint, and dark visual language.",
-//   },
+    image:
+      "https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=1200&q=80",
 
-//   {
-//     id: 12,
-//     title: "ORBIT",
-//     category: "Branding",
-//     year: "2026",
-//     type: "image",
-//     featured: false,
-//     image:
-//       "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1600&q=85",
-//     video: "",
-//     description:
-//       "A futuristic brand system designed around modular graphics, bold typography, and digital-first applications.",
-//   },
+    size: "square",
+  },
+];
 
-//   {
-//     id: 13,
-//     title: "ECHO",
-//     category: "Logo",
-//     year: "2026",
-//     type: "image",
-//     featured: false,
-//     image:
-//       "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1600&q=85",
-//     video: "",
-//     description:
-//       "A minimal identity experiment exploring repetition, symmetry, and a distinctive monogram system.",
-//   },
+/* =========================================================
+   REELS
+========================================================= */
 
-//   {
-//     id: 14,
-//     title: "STATIC / DYNAMIC",
-//     category: "Motion",
-//     year: "2026",
-//     type: "video",
-//     featured: false,
-//     image:
-//       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=85",
-//     video: "",
-//     description:
-//       "A visual experiment contrasting still compositions with aggressive motion and digital transitions.",
-//   },
+export const reels = [
+  {
+    id: "reel-01",
+    title: "Creative Campaign",
+    category: "Video",
+    video:
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    size: "tall",
+  },
 
-//   {
-//     id: 15,
-//     title: "ATLAS",
-//     category: "Branding",
-//     year: "2026",
-//     type: "image",
-//     featured: false,
-//     image:
-//       "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1600&q=85",
-//     video: "",
-//     description:
-//       "A contemporary travel-inspired identity combining bold typography, editorial layouts, and visual storytelling.",
-//   },
+  {
+    id: "reel-02",
+    title: "Visual Story",
+    category: "Motion",
+    video:
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    size: "portrait",
+  },
+
+  {
+    id: "reel-03",
+    title: "Brand Content",
+    category: "Creative",
+    video:
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    size: "square",
+  },
+
+  {
+    id: "reel-04",
+    title: "Social Campaign",
+    category: "Content",
+    video:
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    size: "portrait",
+  },
+
+  {
+    id: "reel-05",
+    title: "Digital Story",
+    category: "Motion",
+    video:
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+    size: "tall",
+  },
 ];

@@ -1,27 +1,18 @@
 import Navbar from "../components/layout/Navbar";
 import Hero from "../sections/Hero";
-import Services from "../sections/Services";
-import Portfolio from "../sections/Portfolio";
-import About from "../sections/About";
-import Process from "../sections/Process";
-import Testimonials from "../sections/Testimonials";
-import FAQ from "../sections/FAQ";
-import Contact from "../sections/Contact";
+import Footer from "../components/layout/Footer";
+
 function Home() {
   return (
     <>
       <Navbar />
 
       <main>
+        {/* Main introduction */}
         <Hero />
-        <Services />
-        <Portfolio />
-        <About />
-        <Process />
-        <Testimonials />
-        <FAQ />
-        <Contact />
       </main>
+
+      
     </>
   );
 }
