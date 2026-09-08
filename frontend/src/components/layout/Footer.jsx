@@ -802,7 +802,9 @@ function Footer() {
               {/* EMAIL */}
 
               <a
-                href="mailto:hello@creative.com"
+               href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@creative.com"
+target="_blank"
+rel="noopener noreferrer"
                 className="
                   group/mail
                   mt-6

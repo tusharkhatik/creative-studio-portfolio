@@ -217,7 +217,6 @@ function ContactCard({
   value,
   description,
   href,
-  primary = false,
   theme = "blue",
 }) {
   const themes = {
