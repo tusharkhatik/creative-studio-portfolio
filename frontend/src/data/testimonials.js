@@ -8,7 +8,7 @@ export const testimonials = [
   },
   {
     id: 2,
-    name: "Sophia Williams",
+    name: "rahul sharma",
     role: "Small Business Owner",
     message:
       "The branding work gave my business a completely new visual identity. Clean, modern, and exactly what I wanted.",
