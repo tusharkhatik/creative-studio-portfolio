@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
+import PublicLayout from "./layouts/PublicLayout";
+import AdminLayout from "./layouts/AdminLayout";
 
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
@@ -14,45 +14,63 @@ import ProjectDetails from "./pages/ProjectDetails";
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#f8f9ff] text-slate-950">
+      <Routes>
 
-        {/* NAVBAR */}
-        <Navbar />
+        {/* =====================================================
+            PUBLIC WEBSITE
+        ===================================================== */}
 
-        {/* PAGE CONTENT */}
-        <main>
-          <Routes>
-            {/* HOME */}
-            <Route path="/" element={<Home />} />
+        <Route element={<PublicLayout />}>
 
-            {/* MAIN PAGES */}
-            <Route path="/about" element={<AboutPage />} />
-            <Route
-              path="/portfolio"
-              element={<PortfolioPage />}
-            />
-            <Route
-              path="/services"
-              element={<ServicesPage />}
-            />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route
-              path="/contact"
-              element={<ContactPage />}
-            />
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
-            {/* PROJECT DETAILS */}
-            <Route
-              path="/portfolio/:projectId"
-              element={<ProjectDetails />}
-            />
-          </Routes>
-        </main>
+          <Route
+            path="/about"
+            element={<AboutPage />}
+          />
 
-        {/* FOOTER */}
-        <Footer />
+          <Route
+            path="/portfolio"
+            element={<PortfolioPage />}
+          />
 
-      </div>
+          <Route
+            path="/portfolio/:projectId"
+            element={<ProjectDetails />}
+          />
+
+          <Route
+            path="/services"
+            element={<ServicesPage />}
+          />
+
+          <Route
+            path="/faq"
+            element={<FAQPage />}
+          />
+
+          <Route
+            path="/contact"
+            element={<ContactPage />}
+          />
+
+        </Route>
+
+
+        {/* =====================================================
+            ADMIN
+        ===================================================== */}
+
+        <Route element={<AdminLayout />}>
+
+          {/* Admin routes will be added here */}
+
+        </Route>
+
+      </Routes>
     </BrowserRouter>
   );
 }
