@@ -1,11 +1,7 @@
-import Services from "../../sections/Services";
+import FAQ from "../../sections/FAQ";
 
-function ServicesPage() {
-  return (
-    <main>
-      <Services />
-    </main>
-  );
+function FAQPage() {
+  return <main className="pt-20"><FAQ /></main>;
 }
 
-export default ServicesPage;
+export default FAQPage;

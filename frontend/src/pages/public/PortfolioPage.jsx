@@ -1,11 +1,11 @@
-import About from "../../sections/About";
+import Portfolio from "../../sections/Portfolio";
 
-function AboutPage() {
+function PortfolioPage() {
   return (
-    <main className="pt-20">
-      <About />
+    <main>
+      <Portfolio />
     </main>
   );
 }
 
-export default AboutPage;
+export default PortfolioPage;
