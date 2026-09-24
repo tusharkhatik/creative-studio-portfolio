@@ -1,32 +1,32 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import PublicLayout from "./layouts/PublicLayout";
-import AdminLayout from "./layouts/AdminLayout";
+import PublicLayout from "../layouts/PublicLayout";
+import AdminLayout from "../layouts/AdminLayout";
 
-import Home from "./pages/public/Home";
-import AboutPage from "./pages/public/AboutPage";
-import PortfolioPage from "./pages/public/PortfolioPage";
-import ProjectDetails from "./pages/public/ProjectDetails";
-import ServicesPage from "./pages/public/ServicesPage";
-import FAQPage from "./pages/public/FAQPage";
-import ContactPage from "./pages/public/ContactPage";
-import PrivacyPage from "./pages/public/PrivacyPage";
-import TermsPage from "./pages/public/TermsPage";
-import NotFoundPage from "./pages/public/NotFoundPage";
+import Home from "../pages/public/Home";
+import AboutPage from "../pages/public/AboutPage";
+import PortfolioPage from "../pages/public/PortfolioPage";
+import ProjectDetails from "../pages/public/ProjectDetails";
+import ServicesPage from "../pages/public/ServicesPage";
+import FAQPage from "../pages/public/FAQPage";
+import ContactPage from "../pages/public/ContactPage";
+import PrivacyPage from "../pages/public/PrivacyPage";
+import TermsPage from "../pages/public/TermsPage";
+import NotFoundPage from "../pages/public/NotFoundPage";
 
-import AdminLogin from "./pages/admin/AdminLogin";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import Projects from "./pages/admin/Projects";
-import ProjectCreate from "./pages/admin/ProjectCreate";
-import ProjectEdit from "./pages/admin/ProjectEdit";
-import Services from "./pages/admin/Services";
-import Testimonials from "./pages/admin/Testimonials";
-import FAQs from "./pages/admin/FAQs";
-import Leads from "./pages/admin/Leads";
-import Media from "./pages/admin/Media";
-import Settings from "./pages/admin/Settings";
+import AdminLogin from "../pages/admin/AdminLogin";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import Projects from "../pages/admin/Projects";
+import ProjectCreate from "../pages/admin/ProjectCreate";
+import ProjectEdit from "../pages/admin/ProjectEdit";
+import Services from "../pages/admin/Services";
+import Testimonials from "../pages/admin/Testimonials";
+import FAQs from "../pages/admin/FAQs";
+import Leads from "../pages/admin/Leads";
+import Media from "../pages/admin/Media";
+import Settings from "../pages/admin/Settings";
 
-function App() {
+function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
@@ -62,4 +62,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppRoutes;
