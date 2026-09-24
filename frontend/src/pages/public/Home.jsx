@@ -1,7 +1,11 @@
-import Home from "../../sections/Hero";
+import Hero from "../../sections/Hero";
 
 function Home() {
-  return <HomeSection />;
+  return (
+    <main className="pt-20">
+      <Hero />
+    </main>
+  );
 }
 
 export default Home;
