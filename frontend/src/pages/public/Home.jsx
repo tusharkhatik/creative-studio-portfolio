@@ -1,7 +1,13 @@
-import Home from "../../sections/Hero";
+import Hero from "../../sections/Hero";
+import Testimonials from "../../sections/Testimonials";
 
 function Home() {
-  return <HomeSection />;
+  return (
+    <main className="pt-20">
+      <Hero />
+      <Testimonials />
+    </main>
+  );
 }
 
 export default Home;

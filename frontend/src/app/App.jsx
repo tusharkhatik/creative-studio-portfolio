@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { AuthProvider } from "../context/AuthContext";
+import ProtectedRoute from "../components/guards/ProtectedRoute";
+
 import PublicLayout from "../layouts/PublicLayout";
 import AdminLayout from "../layouts/AdminLayout";
 
@@ -26,40 +29,43 @@ import Leads from "../pages/admin/Leads";
 import Media from "../pages/admin/Media";
 import Settings from "../pages/admin/Settings";
 
-function AppRoutes() {
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/portfolio/:projectId" element={<ProjectDetails />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/faq" element={<FAQPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/portfolio/:projectId" element={<ProjectDetails />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
 
-        <Route element={<AdminLayout />}>
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/projects" element={<Projects />} />
-          <Route path="/admin/projects/create" element={<ProjectCreate />} />
-          <Route path="/admin/projects/:projectId/edit" element={<ProjectEdit />} />
-          <Route path="/admin/services" element={<Services />} />
-          <Route path="/admin/testimonials" element={<Testimonials />} />
-          <Route path="/admin/faqs" element={<FAQs />} />
-          <Route path="/admin/leads" element={<Leads />} />
-          <Route path="/admin/media" element={<Media />} />
-          <Route path="/admin/settings" element={<Settings />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+
+          <Route element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/projects" element={<Projects />} />
+            <Route path="/admin/projects/create" element={<ProjectCreate />} />
+            <Route path="/admin/projects/:projectId/edit" element={<ProjectEdit />} />
+            <Route path="/admin/services" element={<Services />} />
+            <Route path="/admin/testimonials" element={<Testimonials />} />
+            <Route path="/admin/faqs" element={<FAQs />} />
+            <Route path="/admin/leads" element={<Leads />} />
+            <Route path="/admin/media" element={<Media />} />
+            <Route path="/admin/settings" element={<Settings />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
-export default AppRoutes;
+export default App;

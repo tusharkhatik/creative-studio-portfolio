@@ -1,11 +1,7 @@
-import FAQ from "../../sections/FAQ";
+import Contact from "../../sections/Contact";
 
-function FAQPage() {
-  return (
-    <main className="pt-20">
-      <FAQ />
-    </main>
-  );
+function ContactPage() {
+  return <main className="pt-20"><Contact /></main>;
 }
 
-export default FAQPage;
+export default ContactPage;

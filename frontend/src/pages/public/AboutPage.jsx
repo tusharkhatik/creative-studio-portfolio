@@ -1,11 +1,11 @@
-import Hero from "../../sections/Hero";
+import About from "../../sections/About";
 
-function Home() {
+function AboutPage() {
   return (
     <main className="pt-20">
-      <Hero />
+      <About />
     </main>
   );
 }
 
-export default Home;
+export default AboutPage;

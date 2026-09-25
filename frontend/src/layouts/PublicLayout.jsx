@@ -8,13 +8,11 @@ function PublicLayout() {
   useScrollToTop();
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#080a12] text-white">
       <Navbar />
-
       <main>
         <Outlet />
       </main>
-
       <Footer />
     </div>
   );
