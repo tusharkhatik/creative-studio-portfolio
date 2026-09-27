@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Save } from "lucide-react";
 
 import Card from "../../components/ui/Card";
@@ -7,22 +7,89 @@ import Input from "../../components/ui/Input";
 import Textarea from "../../components/ui/Textarea";
 import Select from "../../components/ui/Select";
 import Button from "../../components/common/Button";
+import Loading from "../../components/feedback/Loading";
 
-function ProjectCreate() {
-  const navigate = useNavigate();
+const demoServices = {
+  "1": {
+    name: "Video Editing",
+    slug: "video-editing",
+    category: "video",
+    shortDescription:
+      "Professional video editing for brands, creators, and businesses.",
+    description:
+      "Complete video editing services including storytelling, pacing, transitions, color correction, sound design, and final delivery.",
+    price: "₹5,000",
+    deliveryTime: "3-5 business days",
+    status: "published",
+    featured: true,
+  },
 
-  const [formData, setFormData] = useState({
-    title: "",
-    slug: "",
-    category: "",
-    client: "",
-    shortDescription: "",
-    description: "",
-    featuredImage: "",
-    projectUrl: "",
+  "2": {
+    name: "Photography",
+    slug: "photography",
+    category: "photography",
+    shortDescription:
+      "Professional photography for products, brands, and campaigns.",
+    description:
+      "Photography services focused on high-quality visuals for products, social media, websites, and marketing campaigns.",
+    price: "₹3,000",
+    deliveryTime: "2-4 business days",
+    status: "published",
+    featured: true,
+  },
+
+  "3": {
+    name: "Logo Design",
+    slug: "logo-design",
+    category: "branding",
+    shortDescription:
+      "Custom logo design for new and growing brands.",
+    description:
+      "A complete logo design process including concept development, revisions, final artwork, and export formats.",
+    price: "₹2,500",
+    deliveryTime: "3-5 business days",
+    status: "published",
+    featured: false,
+  },
+
+  "4": {
+    name: "Motion Graphics",
+    slug: "motion-graphics",
+    category: "motion",
+    shortDescription:
+      "Engaging motion graphics for digital campaigns and social media.",
+    description:
+      "Motion design services for social media campaigns, promotional content, advertisements, and digital experiences.",
+    price: "₹4,000",
+    deliveryTime: "4-7 business days",
     status: "draft",
     featured: false,
-  });
+  },
+};
+
+function ServiceEdit() {
+  const { serviceId } = useParams();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadService = () => {
+      const service = demoServices[serviceId];
+
+      if (!service) {
+        setFormData(null);
+        setLoading(false);
+        return;
+      }
+
+      setFormData(service);
+      setLoading(false);
+    };
+
+    loadService();
+  }, [serviceId]);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -36,20 +103,56 @@ function ProjectCreate() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Project data:", formData);
+    console.log("Updated service:", {
+      id: serviceId,
+      ...formData,
+    });
 
-    navigate("/admin/projects");
+    navigate("/admin/services");
   };
+
+  if (loading) {
+    return (
+      <Loading
+        message="Loading service..."
+        fullScreen
+      />
+    );
+  }
+
+  if (!formData) {
+    return (
+      <section className="p-6 lg:p-8">
+        <Card>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Service Not Found
+          </h1>
+
+          <p className="mt-2 text-gray-600">
+            The service you are trying to edit does not exist.
+          </p>
+
+          <Link
+            to="/admin/services"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-gray-900 px-5 py-2.5 text-sm font-semibold text-white"
+          >
+            <ArrowLeft size={16} />
+            Back to Services
+          </Link>
+        </Card>
+      </section>
+    );
+  }
 
   return (
     <section className="p-6 lg:p-8">
       <div className="mb-8">
         <Link
-          to="/admin/projects"
+          to="/admin/services"
           className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900"
         >
           <ArrowLeft size={16} />
-          Back to Projects
+          Back to Services
         </Link>
 
         <div className="mt-6">
@@ -58,11 +161,11 @@ function ProjectCreate() {
           </p>
 
           <h1 className="mt-1 text-3xl font-bold text-gray-900">
-            Create Project
+            Edit Service
           </h1>
 
           <p className="mt-2 text-gray-600">
-            Add a new project to your creative portfolio.
+            Update this service's information and publishing settings.
           </p>
         </div>
       </div>
@@ -77,17 +180,16 @@ function ProjectCreate() {
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  Enter the main information about this project.
+                  Update the main information about this service.
                 </p>
               </div>
 
               <div className="space-y-5">
                 <Input
-                  id="title"
-                  name="title"
-                  label="Project Title"
-                  placeholder="e.g. Brand Film for Acme"
-                  value={formData.title}
+                  id="name"
+                  name="name"
+                  label="Service Name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
                 />
@@ -96,63 +198,51 @@ function ProjectCreate() {
                   id="slug"
                   name="slug"
                   label="Slug"
-                  placeholder="brand-film-for-acme"
                   value={formData.slug}
                   onChange={handleChange}
-                  helperText="This will be used in the project URL."
+                  helperText="This will be used in the service URL."
                 />
 
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Select
-                    id="category"
-                    name="category"
-                    label="Category"
-                    value={formData.category}
-                    onChange={handleChange}
-                    options={[
-                      {
-                        value: "video",
-                        label: "Video",
-                      },
-                      {
-                        value: "photography",
-                        label: "Photography",
-                      },
-                      {
-                        value: "branding",
-                        label: "Branding",
-                      },
-                      {
-                        value: "motion",
-                        label: "Motion",
-                      },
-                      {
-                        value: "logo",
-                        label: "Logo Design",
-                      },
-                    ]}
-                  />
-
-                  <Input
-                    id="client"
-                    name="client"
-                    label="Client"
-                    placeholder="e.g. Acme Studio"
-                    value={formData.client}
-                    onChange={handleChange}
-                  />
-                </div>
+                <Select
+                  id="category"
+                  name="category"
+                  label="Category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: "video",
+                      label: "Video",
+                    },
+                    {
+                      value: "photography",
+                      label: "Photography",
+                    },
+                    {
+                      value: "branding",
+                      label: "Branding",
+                    },
+                    {
+                      value: "motion",
+                      label: "Motion",
+                    },
+                    {
+                      value: "logo",
+                      label: "Logo Design",
+                    },
+                  ]}
+                />
               </div>
             </Card>
 
             <Card>
               <div className="mb-6">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  Project Content
+                  Service Content
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  Describe the project and the work completed.
+                  Update what clients receive from this service.
                 </p>
               </div>
 
@@ -161,7 +251,6 @@ function ProjectCreate() {
                   id="shortDescription"
                   name="shortDescription"
                   label="Short Description"
-                  placeholder="A short summary of the project..."
                   rows={3}
                   value={formData.shortDescription}
                   onChange={handleChange}
@@ -171,7 +260,6 @@ function ProjectCreate() {
                   id="description"
                   name="description"
                   label="Full Description"
-                  placeholder="Describe the project in detail..."
                   rows={8}
                   value={formData.description}
                   onChange={handleChange}
@@ -182,33 +270,25 @@ function ProjectCreate() {
             <Card>
               <div className="mb-6">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  Media
+                  Pricing & Delivery
                 </h2>
-
-                <p className="mt-1 text-sm text-gray-500">
-                  Add the main visual for this project.
-                </p>
               </div>
 
-              <div className="space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <Input
-                  id="featuredImage"
-                  name="featuredImage"
-                  label="Featured Image URL"
-                  placeholder="https://..."
-                  value={formData.featuredImage}
+                  id="price"
+                  name="price"
+                  label="Starting Price"
+                  value={formData.price}
                   onChange={handleChange}
-                  helperText="Image upload will be connected later."
                 />
 
                 <Input
-                  id="projectUrl"
-                  name="projectUrl"
-                  label="Project URL"
-                  placeholder="https://..."
-                  value={formData.projectUrl}
+                  id="deliveryTime"
+                  name="deliveryTime"
+                  label="Delivery Time"
+                  value={formData.deliveryTime}
                   onChange={handleChange}
-                  helperText="Optional external project link."
                 />
               </div>
             </Card>
@@ -222,7 +302,7 @@ function ProjectCreate() {
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  Control how this project appears publicly.
+                  Control how this service appears publicly.
                 </p>
               </div>
 
@@ -256,11 +336,11 @@ function ProjectCreate() {
 
                   <span>
                     <span className="block text-sm font-medium text-gray-900">
-                      Featured Project
+                      Featured Service
                     </span>
 
                     <span className="mt-1 block text-sm text-gray-500">
-                      Show this project in the featured portfolio section.
+                      Highlight this service on the homepage.
                     </span>
                   </span>
                 </label>
@@ -274,11 +354,11 @@ function ProjectCreate() {
                   className="w-full"
                 >
                   <Save size={17} className="mr-2" />
-                  Save Project
+                  Update Service
                 </Button>
 
                 <Link
-                  to="/admin/projects"
+                  to="/admin/services"
                   className="flex w-full items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-100"
                 >
                   Cancel
@@ -292,4 +372,4 @@ function ProjectCreate() {
   );
 }
 
-export default ProjectCreate;
+export default ServiceEdit;

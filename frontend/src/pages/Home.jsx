@@ -1,19 +1,12 @@
-import Navbar from "../components/layout/Navbar";
-import Hero from "../sections/Hero";
-import Footer from "../components/layout/Footer";
+import Hero from "../../sections/Hero";
+import Testimonials from "../../sections/Testimonials";
 
 function Home() {
   return (
-    <>
-      <Navbar />
-
-      <main>
-        {/* Main introduction */}
-        <Hero />
-      </main>
-
-      
-    </>
+    <main className="pt-20">
+      <Hero />
+      <Testimonials />
+    </main>
   );
 }
 

@@ -8,18 +8,17 @@ import Textarea from "../../components/ui/Textarea";
 import Select from "../../components/ui/Select";
 import Button from "../../components/common/Button";
 
-function ProjectCreate() {
+function ServiceCreate() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    title: "",
+    name: "",
     slug: "",
     category: "",
-    client: "",
     shortDescription: "",
     description: "",
-    featuredImage: "",
-    projectUrl: "",
+    price: "",
+    deliveryTime: "",
     status: "draft",
     featured: false,
   });
@@ -36,20 +35,20 @@ function ProjectCreate() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("Project data:", formData);
+    console.log("Service data:", formData);
 
-    navigate("/admin/projects");
+    navigate("/admin/services");
   };
 
   return (
     <section className="p-6 lg:p-8">
       <div className="mb-8">
         <Link
-          to="/admin/projects"
+          to="/admin/services"
           className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900"
         >
           <ArrowLeft size={16} />
-          Back to Projects
+          Back to Services
         </Link>
 
         <div className="mt-6">
@@ -58,11 +57,11 @@ function ProjectCreate() {
           </p>
 
           <h1 className="mt-1 text-3xl font-bold text-gray-900">
-            Create Project
+            Create Service
           </h1>
 
           <p className="mt-2 text-gray-600">
-            Add a new project to your creative portfolio.
+            Add a new creative service to your website.
           </p>
         </div>
       </div>
@@ -77,17 +76,17 @@ function ProjectCreate() {
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  Enter the main information about this project.
+                  Enter the main information about this service.
                 </p>
               </div>
 
               <div className="space-y-5">
                 <Input
-                  id="title"
-                  name="title"
-                  label="Project Title"
-                  placeholder="e.g. Brand Film for Acme"
-                  value={formData.title}
+                  id="name"
+                  name="name"
+                  label="Service Name"
+                  placeholder="e.g. Professional Video Editing"
+                  value={formData.name}
                   onChange={handleChange}
                   required
                 />
@@ -96,63 +95,52 @@ function ProjectCreate() {
                   id="slug"
                   name="slug"
                   label="Slug"
-                  placeholder="brand-film-for-acme"
+                  placeholder="video-editing"
                   value={formData.slug}
                   onChange={handleChange}
-                  helperText="This will be used in the project URL."
+                  helperText="This will be used in the service URL."
                 />
 
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <Select
-                    id="category"
-                    name="category"
-                    label="Category"
-                    value={formData.category}
-                    onChange={handleChange}
-                    options={[
-                      {
-                        value: "video",
-                        label: "Video",
-                      },
-                      {
-                        value: "photography",
-                        label: "Photography",
-                      },
-                      {
-                        value: "branding",
-                        label: "Branding",
-                      },
-                      {
-                        value: "motion",
-                        label: "Motion",
-                      },
-                      {
-                        value: "logo",
-                        label: "Logo Design",
-                      },
-                    ]}
-                  />
-
-                  <Input
-                    id="client"
-                    name="client"
-                    label="Client"
-                    placeholder="e.g. Acme Studio"
-                    value={formData.client}
-                    onChange={handleChange}
-                  />
-                </div>
+                <Select
+                  id="category"
+                  name="category"
+                  label="Category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: "video",
+                      label: "Video",
+                    },
+                    {
+                      value: "photography",
+                      label: "Photography",
+                    },
+                    {
+                      value: "branding",
+                      label: "Branding",
+                    },
+                    {
+                      value: "motion",
+                      label: "Motion",
+                    },
+                    {
+                      value: "logo",
+                      label: "Logo Design",
+                    },
+                  ]}
+                />
               </div>
             </Card>
 
             <Card>
               <div className="mb-6">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  Project Content
+                  Service Content
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  Describe the project and the work completed.
+                  Describe what clients receive from this service.
                 </p>
               </div>
 
@@ -161,7 +149,7 @@ function ProjectCreate() {
                   id="shortDescription"
                   name="shortDescription"
                   label="Short Description"
-                  placeholder="A short summary of the project..."
+                  placeholder="A short summary of the service..."
                   rows={3}
                   value={formData.shortDescription}
                   onChange={handleChange}
@@ -171,7 +159,7 @@ function ProjectCreate() {
                   id="description"
                   name="description"
                   label="Full Description"
-                  placeholder="Describe the project in detail..."
+                  placeholder="Describe the service in detail..."
                   rows={8}
                   value={formData.description}
                   onChange={handleChange}
@@ -182,33 +170,31 @@ function ProjectCreate() {
             <Card>
               <div className="mb-6">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  Media
+                  Pricing & Delivery
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  Add the main visual for this project.
+                  Define the starting price and expected delivery time.
                 </p>
               </div>
 
-              <div className="space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <Input
-                  id="featuredImage"
-                  name="featuredImage"
-                  label="Featured Image URL"
-                  placeholder="https://..."
-                  value={formData.featuredImage}
+                  id="price"
+                  name="price"
+                  label="Starting Price"
+                  placeholder="e.g. ₹5,000"
+                  value={formData.price}
                   onChange={handleChange}
-                  helperText="Image upload will be connected later."
                 />
 
                 <Input
-                  id="projectUrl"
-                  name="projectUrl"
-                  label="Project URL"
-                  placeholder="https://..."
-                  value={formData.projectUrl}
+                  id="deliveryTime"
+                  name="deliveryTime"
+                  label="Delivery Time"
+                  placeholder="e.g. 3-5 business days"
+                  value={formData.deliveryTime}
                   onChange={handleChange}
-                  helperText="Optional external project link."
                 />
               </div>
             </Card>
@@ -222,7 +208,7 @@ function ProjectCreate() {
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500">
-                  Control how this project appears publicly.
+                  Control how this service appears publicly.
                 </p>
               </div>
 
@@ -256,11 +242,11 @@ function ProjectCreate() {
 
                   <span>
                     <span className="block text-sm font-medium text-gray-900">
-                      Featured Project
+                      Featured Service
                     </span>
 
                     <span className="mt-1 block text-sm text-gray-500">
-                      Show this project in the featured portfolio section.
+                      Highlight this service on the homepage.
                     </span>
                   </span>
                 </label>
@@ -274,11 +260,11 @@ function ProjectCreate() {
                   className="w-full"
                 >
                   <Save size={17} className="mr-2" />
-                  Save Project
+                  Save Service
                 </Button>
 
                 <Link
-                  to="/admin/projects"
+                  to="/admin/services"
                   className="flex w-full items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-100"
                 >
                   Cancel
@@ -292,4 +278,4 @@ function ProjectCreate() {
   );
 }
 
-export default ProjectCreate;
+export default ServiceCreate;

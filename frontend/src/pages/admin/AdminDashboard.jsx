@@ -1,12 +1,53 @@
-function AdminLogin() {
+function AdminDashboard() {
   return (
-    <main className="flex min-h-screen items-center justify-center px-6 text-white">
-      <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/5 p-8">
-        <h1 className="text-3xl font-bold">Admin Login</h1>
-        <p className="mt-2 text-sm text-white/60">Authentication flow will be added here.</p>
+    <section className="min-h-screen bg-gray-50 p-8">
+      <div className="mb-8">
+        <p className="text-sm font-medium text-gray-500">
+          Admin Panel
+        </p>
+
+        <h1 className="mt-1 text-3xl font-bold text-gray-900">
+          Dashboard
+        </h1>
+
+        <p className="mt-2 text-gray-600">
+          Welcome back. Here's an overview of your creative studio.
+        </p>
       </div>
-    </main>
+
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <p className="text-sm text-gray-500">Projects</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900">24</p>
+        </div>
+
+        <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <p className="text-sm text-gray-500">Services</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900">8</p>
+        </div>
+
+        <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <p className="text-sm text-gray-500">New Leads</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900">12</p>
+        </div>
+
+        <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <p className="text-sm text-gray-500">Testimonials</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900">18</p>
+        </div>
+      </div>
+
+      <div className="mt-8 rounded-2xl border bg-white p-6 shadow-sm">
+        <h2 className="text-xl font-semibold text-gray-900">
+          Recent Activity
+        </h2>
+
+        <p className="mt-2 text-gray-500">
+          Recent projects, leads, and other admin activity will appear here.
+        </p>
+      </div>
+    </section>
   );
 }
 
-export default AdminLogin;
+export default AdminDashboard;

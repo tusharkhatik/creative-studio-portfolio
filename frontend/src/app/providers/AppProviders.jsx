@@ -1,7 +1,7 @@
-import AppRoutes from "./routes";
+import { AuthProvider } from "./AuthProvider";
 
-function App() {
-  return <AppRoutes />;
+function AppProviders({ children }) {
+  return <AuthProvider>{children}</AuthProvider>;
 }
 
-export default App;
+export default AppProviders;
